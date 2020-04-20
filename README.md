@@ -6,4 +6,4 @@ The centerlines can be coupled with the [BeamFEMForcefield](https://github.com/s
 
 You can find examples in the *scenes* directory
 
-![Mesh Skeletonization and Beams](https://github.com/rouge1616/SofaSkeletonPlugin/blob/master/MeshSkeletonization.png)
+![Mesh Skeletonization and Beams](https://github.com/rouge1616/SofaSkeletonPlugin/blob/master/MeshSkeletonization.jpg)

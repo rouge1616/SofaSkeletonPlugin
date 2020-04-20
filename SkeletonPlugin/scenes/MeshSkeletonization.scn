@@ -11,10 +11,15 @@
 		<OglModel name="visualModel" src='@myLoader' color="1 0.6 0.6 1"/>
 		<MeshSkeletonization template="Vec3d" name="skel" inputVertices="@myLoader.position" inputTriangles="@myLoader.triangles" />
 	</Node>
-	<Node name="elephant" activated="1">
+	<Node name="elephant" activated="0">
 		<MeshObjLoader name='myLoader' filename='data/mesh/elephant.obj'/>  
 		<OglModel name="visualModel" src='@myLoader' color="1 0.6 0.6 1"/>
 		<MeshSkeletonization template="Vec3d" name="skel" filename="data/mesh/elephant.off" />
+	</Node>
+	<Node name="dragon" activated="1">
+		<MeshObjLoader name='myLoader' filename='data/mesh/raptor8k1.obj'/>  
+		<OglModel name="visualModel" src='@myLoader' color="1 0.6 0.6 1"/>
+		<MeshSkeletonization template="Vec3d" name="skel" inputVertices="@myLoader.position" inputTriangles="@myLoader.triangles" />
 	</Node>
 
  
