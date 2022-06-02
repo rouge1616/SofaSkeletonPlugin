@@ -1,6 +1,6 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2019 INRIA, USTL, UJF, CNRS, MGH                    *
+*                 SOFA, Simulation Open-Framework Architecture                *
+*                    (c) 2006 INRIA, USTL, UJF, CNRS, MGH                     *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -19,26 +19,64 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-/*
- * CGALSkeltonization.cpp
- *
- * Last update: 15 of June 2021
- * Author: Nazim Haouchine & Sidaty El Hadramy
- */
-#define SkeletonPlugin_DECIMETEMESH_CPP
-
 #include <config.h.in>
-#include <MeshSkeletonization.inl>
-#include <sofa/core/ObjectFactory.h>
-#include <sofa/defaulttype/VecTypes.h>
-#include <sofa/defaulttype/RigidTypes.h>
 
-using namespace sofa::defaulttype;
-using namespace cgal;
+namespace sofa
+{
 
-int MeshSkeletonizationClass = sofa::core::RegisterObject("Ouput the skeleton of a triangulated mesh, from .off file or .obj (MeshLoader) using CGAL")
-        .add< MeshSkeletonization<Vec3Types> >()
-        ;
+namespace component
+{
 
-template class SOFA_MeshSkeletonizationPlugin_API cgal::MeshSkeletonization<Vec3Types>;
- 
+//Here are just several convenient functions to help users know what the plugin contains 
+
+extern "C" {
+    SOFA_MeshSkeletonizationPlugin_API void initExternalModule();
+    SOFA_MeshSkeletonizationPlugin_API const char* getModuleName();
+    SOFA_MeshSkeletonizationPlugin_API const char* getModuleVersion();
+    SOFA_MeshSkeletonizationPlugin_API const char* getModuleLicense();
+    SOFA_MeshSkeletonizationPlugin_API const char* getModuleDescription();
+    SOFA_MeshSkeletonizationPlugin_API const char* getModuleComponentList();
+}
+
+void initExternalModule()
+{
+    static bool first = true;
+    if (first)
+    {
+        first = false;
+    }
+}
+
+const char* getModuleName()
+{
+    return "MeshSkeletonization Plugin";
+}
+
+const char* getModuleVersion()
+{
+    return "0.2";
+}
+
+const char* getModuleLicense()
+{
+    return "GPL";
+}
+
+
+const char* getModuleDescription()
+{
+    return "Use CGAL to generate mesh skeleton";
+}
+
+const char* getModuleComponentList()
+{
+    return "MeshSkeletonization";
+}
+
+
+
+}
+
+}
+
+

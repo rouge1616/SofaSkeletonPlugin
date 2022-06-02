@@ -1,0 +1,11 @@
+# CMake package configuration file for the MeshSkeletonizationPlugin plugin
+
+@PACKAGE_INIT@
+
+
+find_package(SofaFramework REQUIRED)
+find_package(SofaSimulationCommon REQUIRED)
+find_package(CGAL QUIET REQUIRED)
+
+
+check_required_components(MeshSkeletonizationPlugin)
