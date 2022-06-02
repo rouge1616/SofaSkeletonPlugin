@@ -31,12 +31,19 @@ The example bellow store in the output file the skeleton of a the input vessel m
 	
 </Node>
 ```
-Please note that it is also compatible with [SOFAPython3](https://sofapython3.readthedocs.io/en/latest/)
+
+It is important to specify the ```inputFile``` in which the plugin will write the centerlines. 
+
+This file will contain a set of points per polyline, polylines are separated by an empty line. Biforcation points can be found on their corresponant polylines.
+
+Please note that the plugin is compatible with [SOFAPython3](https://sofapython3.readthedocs.io/en/latest/)
 
 The scene above visualusation: 
 ![Mesh Skeletonization ](./data/img/visu_skel.png)
 
 Other examples can be found in the *scenes* directory
+
+ 
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
