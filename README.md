@@ -43,7 +43,9 @@ The scene above visualusation:
 
 Other examples can be found in the *scenes* directory
 
- 
+## AUTHOR :
+ - Nazim Haouchine
+ - Sidaty El Hadramy
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
