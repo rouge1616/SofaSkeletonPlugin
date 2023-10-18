@@ -29,12 +29,12 @@
 #ifndef SkeletonPlugin_MeshSkeletonization_H
 #define SkeletonPlugin_MeshSkeletonization_H
 
-#include <sofa/defaulttype/Vec.h>
+#include <sofa/type/Vec.h>
 #include <sofa/defaulttype/VecTypes.h>
 #include <sofa/core/DataEngine.h>
 #include <sofa/core/behavior/MechanicalState.h>
 #include <sofa/core/topology/BaseMeshTopology.h>
-#include <sofa/helper/gl/template.h>
+#include </home/robot/aabb/sofa/master/src/Sofa/GL/src/sofa/gl/template.h>
 #include <sofa/core/visual/VisualModel.h>
 #include <sofa/core/visual/VisualParams.h>
 #include <sofa/core/objectmodel/DataFileName.h>
@@ -46,7 +46,7 @@
 #include <CGAL/boost/graph/graph_traits_Polyhedron_3.h>
 
 // Adaptor for Polyhedron_3
-#include <CGAL/Surface_mesh_simplification/HalfedgeGraph_Polyhedron_3.h>
+#include <CGAL/boost/graph/halfedge_graph_traits_Polyhedron_3.h>
 
 // Skeletonization function
 #include <CGAL/extract_mean_curvature_flow_skeleton.h>
@@ -91,7 +91,7 @@ public:
     typedef typename DataTypes::Coord Coord;
     typedef typename DataTypes::VecCoord VecCoord;
     typedef typename Coord::value_type Real;
-    typedef Vec<3,Real> Vec3;
+    typedef type::Vec<3,Real> Vec3;
 
 public:
     MeshSkeletonization();
@@ -103,10 +103,10 @@ public:
     void doUpdate();
     void draw(const sofa::core::visual::VisualParams* vparams);
 
-    virtual std::string getTemplateName() const
-    {
-        return templateName(this);
-    }
+    //virtual std::string getTemplateName() const
+    //{
+    //    return templateName(this);
+    //}
 
     static std::string templateName(const MeshSkeletonization<DataTypes>* = NULL)
     {
@@ -123,7 +123,7 @@ public:
 
     // Outputs
     sofa::core::objectmodel::Data<VecCoord> m_outPoints;
-    sofa::core::objectmodel::Data<helper::vector<int> > m_outLines;
+    sofa::core::objectmodel::Data<type::vector<int> > m_outLines;
 
     // Parameters
     sofa::core::objectmodel::DataFileName m_filename;    

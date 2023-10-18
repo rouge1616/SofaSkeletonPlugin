@@ -27,7 +27,7 @@
  */
 #define SkeletonPlugin_DECIMETEMESH_CPP
 
-#include <SkeletonPlugin/config.h>
+#include <SkeletonPlugin/config.h.in>
 #include "MeshSkeletonization.inl"
 #include <sofa/core/ObjectFactory.h>
 #include <sofa/defaulttype/VecTypes.h>

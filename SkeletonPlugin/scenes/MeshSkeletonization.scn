@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<Node name="root" gravity="0 0 0" dt="1"  >
+<Node name="root" gravity="0 0 0" dt="0.01"  >
 
 	<VisualStyle displayFlags="showVisualModels showWireframe hideBehaviorModels hideCollisionModels hideMappings hideForceFields" />
 	<RequiredPlugin pluginName="SkeletonPlugin"/>
 	<RequiredPlugin pluginName='SofaOpenglVisual'/>
 	<ViewerSetting resolution="1200 1200" />
 
-	<Node name="Vessels" activated="0">
-		<MeshObjLoader name='myLoader' filename='data/mesh/vessels.obj'/>  
+	<Node name="Vessels" activated="1">
+		<MeshObjLoader name='myLoader' filename='data/mesh/Left.obj'/>  
 		<OglModel name="visualModel" src='@myLoader' color="1 0.6 0.6 1"/>
 		<MeshSkeletonization template="Vec3d" name="skel" inputVertices="@myLoader.position" inputTriangles="@myLoader.triangles" />
 	</Node>
@@ -16,7 +16,7 @@
 		<OglModel name="visualModel" src='@myLoader' color="1 0.6 0.6 1"/>
 		<MeshSkeletonization template="Vec3d" name="skel" filename="data/mesh/elephant.off" />
 	</Node>
-	<Node name="dragon" activated="1">
+	<Node name="dragon" activated="0">
 		<MeshObjLoader name='myLoader' filename='data/mesh/raptor8k1.obj'/>  
 		<OglModel name="visualModel" src='@myLoader' color="1 0.6 0.6 1"/>
 		<MeshSkeletonization template="Vec3d" name="skel" inputVertices="@myLoader.position" inputTriangles="@myLoader.triangles" />

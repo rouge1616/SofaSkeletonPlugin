@@ -107,12 +107,12 @@ void MeshSkeletonization<DataTypes>::init()
 	for(Skeleton_vertex v : CGAL::make_range(vertices(m_skeleton)))
 	{
 		outPoints.push_back(Coord(m_skeleton[v].point[0], m_skeleton[v].point[1], m_skeleton[v].point[2]));
-		//outputV << "v " << m_skeleton[v].point << std::endl;
 		outputP << m_skeleton[v].point << " 0 0 0 1 ";
+		//outputP << m_skeleton[v].point << std::endl;
 	}
 	outputP.close();
 
-        helper::WriteAccessor< Data< helper::vector<int> > > outLines = m_outLines;
+        helper::WriteAccessor< Data< type::vector<int> > > outLines = m_outLines;
 	std::ofstream outputL("outputLines.obj");
 	for(Skeleton_edge e : CGAL::make_range(edges(m_skeleton)))
 	{
@@ -171,7 +171,7 @@ void MeshSkeletonization<DataTypes>::draw(const sofa::core::visual::VisualParams
 {
 	std::vector<Coord> dvec;
 
-    	const sofa::defaulttype::Vec4f& colour = sofa::defaulttype::Vec4f(0.1,0.5,0.1,1);
+    	const sofa::type::Vec4f& colour = sofa::type::Vec4f(0.1,0.5,0.1,1);
 	for(Skeleton_edge e : CGAL::make_range(edges(m_skeleton)))
   	{
 		const Point& s = m_skeleton[source(e, m_skeleton)].point;
@@ -179,7 +179,8 @@ void MeshSkeletonization<DataTypes>::draw(const sofa::core::visual::VisualParams
    		dvec.resize(2);
 		dvec[0] = Coord(s[0], s[1], s[2]);
 		dvec[1] = Coord(t[0], t[1], t[2]);
-		vparams->drawTool()->drawLines( dvec, 40, colour);		
+		//vparams->drawTool()->drawLines( dvec, 10, colour);		// 40 --> 10
+		vparams->drawTool()->drawSphere(dvec[0], 0.2, colour);
 		dvec.clear();
 		//vparams->drawTool()->drawLine( Coord(s[0], s[1], s[2]), Coord(t[0], t[1], t[2]), colour);		
 	} 	

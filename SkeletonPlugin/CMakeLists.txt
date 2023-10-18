@@ -21,7 +21,14 @@ set(README_FILES SkeletonPlugin.txt)
 ### Dependencies
 
 
-find_package(SofaFramework REQUIRED)
+#find_package(SofaFramework REQUIRED)
+find_package(Sofa.Helper REQUIRED)
+find_package(Sofa.DefaultType REQUIRED)
+find_package(Sofa.Core REQUIRED)
+find_package(Sofa.Simulation.Core REQUIRED)
+find_package(Sofa.Config REQUIRED)
+find_package(Sofa.Type REQUIRED)
+find_package(Sofa.GL REQUIRED)
 find_package(image QUIET)
 find_package(CGAL REQUIRED)
 
@@ -76,11 +83,20 @@ set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${SkeletonPlugin_VERSION})
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_SkeletonPlugin")
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
-target_link_libraries(${PROJECT_NAME} SofaCore SofaSimulationCommon ${Boost_LIBRARIES} ${GMP_LIBRARIES} ${MPFR_LIBRARIES} ${CGAL_LIBRARY})
+target_link_libraries(${PROJECT_NAME} Sofa.Core Sofa.Simulation.Common ${Boost_LIBRARIES} ${GMP_LIBRARIES} ${MPFR_LIBRARIES} ${CGAL_LIBRARY})
 
 
 ## Install rules for the library and the headers; CMake package configurations files
-sofa_create_package(SkeletonPlugin ${SkeletonPlugin_VERSION} SkeletonPlugin SkeletonPlugin)
+# sofa_create_package(SkeletonPlugin ${SkeletonPlugin_VERSION} SkeletonPlugin SkeletonPlugin)
+sofa_create_package_with_targets(
+    PACKAGE_NAME ${PROJECT_NAME}
+    PACKAGE_VERSION "1.0"
+    TARGETS ${PROJECT_NAME} AUTO_SET_TARGET_PROPERTIES
+    INCLUDE_SOURCE_DIR "src"
+    INCLUDE_INSTALL_DIR ${PROJECT_NAME}
+    EXAMPLE_INSTALL_DIR "examples"
+    RELOCATABLE "plugins"
+    )
 
 ## Install rules for the resources
 install(DIRECTORY scenes/ DESTINATION share/sofa/plugins/${PROJECT_NAME})
