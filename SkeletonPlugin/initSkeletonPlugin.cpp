@@ -19,7 +19,7 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#include <SkeletonPlugin/config.h>
+#include <SkeletonPlugin/config.h.in>
 
 //#include <MeshGenerationFromPolyhedron.h>
 
