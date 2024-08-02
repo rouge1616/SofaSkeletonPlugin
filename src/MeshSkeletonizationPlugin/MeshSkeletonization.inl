@@ -36,16 +36,16 @@ namespace meshskeletonizationplugin
 
 template <class DataTypes>
 MeshSkeletonization<DataTypes>::MeshSkeletonization()
-    : m_inVertices(initData (&m_inVertices, "inputVertices", "List of input mesh vertices"))
-    , m_inTriangles(initData(&m_inTriangles, "inputTriangles", "List of input mesh triangles"))
-    , m_outFile(initData(&m_outFile, "outputSkeleton", "File path to output skeleton file"))
-    , m_filename(initData (&m_filename, "filename", "Input mesh in .off format")) 
+    : d_inVertices(initData (&d_inVertices, "inputVertices", "List of input mesh vertices"))
+    , d_inTriangles(initData(&d_inTriangles, "inputTriangles", "List of input mesh triangles"))
+    , d_outSkeletonFilename(initData(&d_outSkeletonFilename, "outputSkeleton", "File path to output skeleton file"))
+    , d_inMeshFilename(initData (&d_inMeshFilename, "filename", "Input mesh in .off format")) 
 {
-    addInput(&m_inVertices);
-    addInput(&m_inTriangles);
-    addInput(&m_filename);
+    addInput(&d_inVertices);
+    addInput(&d_inTriangles);
+    addInput(&d_inMeshFilename);
 
-    addOutput(&m_outFile);
+    addOutput(&d_outSkeletonFilename);
 }
 
 
@@ -53,7 +53,7 @@ template <class DataTypes>
 void MeshSkeletonization<DataTypes>::init() 
 {
     //Input
-    if(m_outFile.getValue().empty())
+    if(d_outSkeletonFilename.getValue().empty())
     {
         msg_error() << "No input File to store the skeleton data, please set a inputFile path.";
         return;
@@ -64,8 +64,8 @@ void MeshSkeletonization<DataTypes>::init()
 template <class DataTypes>
 void MeshSkeletonization<DataTypes>::geometryToPolyhedron(Polyhedron &s)
 {
-    VecCoord inVertices = m_inVertices.getValue();
-    SeqTriangles inTriangles = m_inTriangles.getValue();
+    VecCoord inVertices = d_inVertices.getValue();
+    SeqTriangles inTriangles = d_inTriangles.getValue();
 
     geometryToPolyhedronOp<HalfedgeDS> gen(inVertices, inTriangles);
     s.delegate(gen);
@@ -77,9 +77,9 @@ void MeshSkeletonization<DataTypes>::doUpdate()
 {
     Polyhedron tmesh;
 
-    if(m_filename.getFullPath() != "") 
+    if(d_inMeshFilename.getFullPath() != "") 
     {
-        const char* filename = m_filename.getFullPath().c_str();
+        const char* filename = d_inMeshFilename.getFullPath().c_str();
         std::ifstream input(filename);
         input >> tmesh;
         msg_info() << "Loading Polyhedron from file.";
@@ -87,7 +87,6 @@ void MeshSkeletonization<DataTypes>::doUpdate()
     else 
     {
         geometryToPolyhedron(tmesh);
-        msg_info() << "Loading Polyhedron from MeshObjLoader.";
         msg_info() << "Number of vertices of the input mesh: " << boost::num_vertices(tmesh);
     }
 
@@ -101,9 +100,9 @@ void MeshSkeletonization<DataTypes>::doUpdate()
     msg_info() << "Number of vertices of the output skeleton: " << boost::num_vertices(m_skeleton);
     msg_info() << "Number of edges of the output skeleton: " << boost::num_edges(m_skeleton);
 
-    if (m_outFile.isSet())
+    if (d_outSkeletonFilename.isSet())
     {
-        std::ofstream OutputP(m_outFile.getFullPath(), std::ofstream::out | std::ofstream::trunc);
+        std::ofstream OutputP(d_outSkeletonFilename.getFullPath(), std::ofstream::out | std::ofstream::trunc);
         Export_polylines extractor(m_skeleton, OutputP);
         CGAL::split_graph_into_polylines(m_skeleton, extractor);
         OutputP.close();

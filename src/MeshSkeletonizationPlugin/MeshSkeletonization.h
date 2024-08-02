@@ -78,9 +78,12 @@ public:
     using SeqTriangles = sofa::core::topology::BaseMeshTopology::SeqTriangles;
 
     // Inputs 
-    sofa::core::objectmodel::Data<VecCoord> m_inVertices; ///< List of vertices
-    sofa::core::objectmodel::Data<SeqTriangles> m_inTriangles; ///< List of triangles
-    sofa::core::objectmodel::DataFileName m_outFile; ///< File path to export skeleton
+    sofa::core::objectmodel::Data<VecCoord> d_inVertices; ///< List of vertices
+    sofa::core::objectmodel::Data<SeqTriangles> d_inTriangles; ///< List of triangles
+
+    // Parameters
+    sofa::core::objectmodel::DataFileName d_inMeshFilename;
+    sofa::core::objectmodel::DataFileName d_outSkeletonFilename; ///< File path to export skeleton
         
 private:
     MeshSkeletonization();
@@ -93,9 +96,6 @@ private:
 
     // convert a set of vertices and tringles to polyhedron 
     void geometryToPolyhedron(Polyhedron &s); 
-
-    // Parameters
-    sofa::core::objectmodel::DataFileName m_filename;   
 
     // Members	
     Skeleton m_skeleton;
