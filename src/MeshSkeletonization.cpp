@@ -41,4 +41,3 @@ int MeshSkeletonizationClass = sofa::core::RegisterObject("Ouput the skeleton of
         ;
 
 template class SOFA_MeshSkeletonizationPlugin_API cgal::MeshSkeletonization<Vec3Types>;
- 
