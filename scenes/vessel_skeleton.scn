@@ -11,7 +11,7 @@
 
     <MeshSkeletonization template="Vec3d" name="skeleton"
                     inputVertices="@meshLoader.position" inputTriangles="@meshLoader.triangles"
-                    inputFile="../data/skeletons/output_vessels_skeleton.txt"
+                    outputSkeleton="../data/skeletons/output_vessels_skeleton.txt"
                     />
     
     <Node name="visual">
