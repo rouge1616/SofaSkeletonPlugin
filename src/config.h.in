@@ -19,19 +19,15 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#ifndef MeshSkeletonizationPlugin_CONFIG_H
-#define MeshSkeletonizationPlugin_CONFIG_H
+#pragma once
 
 #include <sofa/config.h>
 
-#define MeshSkeletonizationPlugin_MAJOR_VERSION ${MeshSkeletonizationPlugin_MAJOR_VERSION}
-#define MeshSkeletonizationPlugin_MINOR_VERSION ${MeshSkeletonizationPlugin_MINOR_VERSION}
+#define MESHSKELETONIZATIONPLUGIN_VERSION @PROJECT_VERSION@
 
-#ifdef SOFA_BUILD_MeshSkeletonizationPlugin
-#  define SOFA_TARGET MeshSkeletonizationPlugin
-#  define SOFA_MeshSkeletonizationPlugin_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#ifdef SOFA_BUILD_MESHSKELETONIZATIONPLUGIN
+#  define SOFA_TARGET @PROJECT_NAME@
+#  define SOFA_MESHSKELETONIZATIONPLUGIN_API SOFA_EXPORT_DYNAMIC_LIBRARY
 #else
-#  define SOFA_MeshSkeletonizationPlugin_API SOFA_IMPORT_DYNAMIC_LIBRARY
-#endif
-
+#  define SOFA_MESHSKELETONIZATIONPLUGIN_API SOFA_IMPORT_DYNAMIC_LIBRARY
 #endif

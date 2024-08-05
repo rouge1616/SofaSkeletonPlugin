@@ -21,21 +21,17 @@
 ******************************************************************************/
 #include <config.h.in>
 
-namespace sofa
-{
-
-namespace component
+namespace meshskeletonization
 {
 
 //Here are just several convenient functions to help users know what the plugin contains 
 
 extern "C" {
-    SOFA_MeshSkeletonizationPlugin_API void initExternalModule();
-    SOFA_MeshSkeletonizationPlugin_API const char* getModuleName();
-    SOFA_MeshSkeletonizationPlugin_API const char* getModuleVersion();
-    SOFA_MeshSkeletonizationPlugin_API const char* getModuleLicense();
-    SOFA_MeshSkeletonizationPlugin_API const char* getModuleDescription();
-    SOFA_MeshSkeletonizationPlugin_API const char* getModuleComponentList();
+    SOFA_MESHSKELETONIZATIONPLUGIN_API void initExternalModule();
+    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleName();
+    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleVersion();
+    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleLicense();
+    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleDescription();
 }
 
 void initExternalModule()
@@ -49,12 +45,12 @@ void initExternalModule()
 
 const char* getModuleName()
 {
-    return "MeshSkeletonization Plugin";
+    return sofa_tostring(SOFA_TARGET);
 }
 
 const char* getModuleVersion()
 {
-    return "0.2";
+    return sofa_tostring(MESHSKELETONIZATIONPLUGIN_VERSION);
 }
 
 const char* getModuleLicense()
@@ -68,15 +64,4 @@ const char* getModuleDescription()
     return "Use CGAL to generate mesh skeleton";
 }
 
-const char* getModuleComponentList()
-{
-    return "MeshSkeletonization";
 }
-
-
-
-}
-
-}
-
-

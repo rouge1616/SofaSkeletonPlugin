@@ -20,24 +20,24 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 /*
- * CGALSkeltonization.cpp
- *
- * Last update: 15 of June 2021
- * Author: Nazim Haouchine & Sidaty El Hadramy
+  * Author: Nazim Haouchine & Sidaty El Hadramy
  */
-#define SkeletonPlugin_DECIMETEMESH_CPP
+#define MESHSKELETONIZATION_CPP
 
-#include <config.h.in>
 #include <MeshSkeletonization.inl>
+
 #include <sofa/core/ObjectFactory.h>
 #include <sofa/defaulttype/VecTypes.h>
-#include <sofa/defaulttype/RigidTypes.h>
+
+namespace meshskeletonization
+{
 
 using namespace sofa::defaulttype;
-using namespace cgal;
 
-int MeshSkeletonizationClass = sofa::core::RegisterObject("Ouput the skeleton of a triangulated mesh, from .off file or .obj (MeshLoader) using CGAL")
+const int MeshSkeletonizationClass = sofa::core::RegisterObject("Ouput the skeleton of a triangulated mesh, from .off file or .obj (MeshLoader) using CGAL")
         .add< MeshSkeletonization<Vec3Types> >()
         ;
 
-template class SOFA_MeshSkeletonizationPlugin_API cgal::MeshSkeletonization<Vec3Types>;
+template class SOFA_MESHSKELETONIZATIONPLUGIN_API MeshSkeletonization<Vec3Types>;
+
+} // namespace meshskeletonization
