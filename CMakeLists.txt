@@ -9,17 +9,17 @@ sofa_find_package(CGAL REQUIRED)
 message(STATUS "CGAL VERSION = ${CGAL_VERSION}")
 
 
-set(PLUGIN_Skeletonization_SRC_DIR src/)
+set(PLUGIN_SKELETONIZATION_SRC_DIR src/MeshSkeletonizationPlugin)
 
 set(HEADER_FILES
-    ${PLUGIN_Skeletonization_SRC_DIR}/config.h.in
-    ${PLUGIN_Skeletonization_SRC_DIR}/MeshSkeletonization.h
-    ${PLUGIN_Skeletonization_SRC_DIR}/MeshSkeletonization.inl
+    ${PLUGIN_SKELETONIZATION_SRC_DIR}/config.h.in
+    ${PLUGIN_SKELETONIZATION_SRC_DIR}/MeshSkeletonization.h
+    ${PLUGIN_SKELETONIZATION_SRC_DIR}/MeshSkeletonization.inl
 )
 
 set(SOURCE_FILES
-    ${PLUGIN_Skeletonization_SRC_DIR}/initMeshSkeletonizationPlugin.cpp
-    ${PLUGIN_Skeletonization_SRC_DIR}/MeshSkeletonization.cpp
+    ${PLUGIN_SKELETONIZATION_SRC_DIR}/initMeshSkeletonizationPlugin.cpp
+    ${PLUGIN_SKELETONIZATION_SRC_DIR}/MeshSkeletonization.cpp
 )
 
 set(README_FILES README.md)

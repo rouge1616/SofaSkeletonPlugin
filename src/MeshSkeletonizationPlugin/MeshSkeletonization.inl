@@ -27,11 +27,11 @@
 
 #pragma once
 
-#include <MeshSkeletonization.h>
+#include <MeshSkeletonizationPlugin/MeshSkeletonization.h>
 
 using namespace sofa::core::objectmodel;
 
-namespace meshskeletonization
+namespace meshskeletonizationplugin
 {
 
 template <class DataTypes>
@@ -131,4 +131,4 @@ void MeshSkeletonization<DataTypes>::draw(const sofa::core::visual::VisualParams
     } 
 }
 
-} // namespace meshskeletonization
+} // namespace meshskeletonizationplugin

@@ -59,7 +59,7 @@ typedef Skeleton::edge_descriptor Skeleton_edge;
 using namespace sofa;
 using namespace sofa::defaulttype;
 
-namespace meshskeletonization
+namespace meshskeletonizationplugin
 {
 
 template <class DataTypes>
@@ -183,4 +183,4 @@ private:
 extern template class SOFA_MESHSKELETONIZATIONPLUGIN_API MeshSkeletonization<defaulttype::Vec3Types>;
 #endif
 
-} // namespace meshskeletonization
+} // namespace meshskeletonizationplugin

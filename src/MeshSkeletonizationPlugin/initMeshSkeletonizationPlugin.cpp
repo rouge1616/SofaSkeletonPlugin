@@ -1,6 +1,6 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2019 INRIA, USTL, UJF, CNRS, MGH                    *
+*                 SOFA, Simulation Open-Framework Architecture                *
+*                    (c) 2006 INRIA, USTL, UJF, CNRS, MGH                     *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -19,25 +19,49 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-/*
-  * Author: Nazim Haouchine & Sidaty El Hadramy
- */
-#define MESHSKELETONIZATION_CPP
+#include <MeshSkeletonizationPlugin/config.h>
 
-#include <MeshSkeletonization.inl>
-
-#include <sofa/core/ObjectFactory.h>
-#include <sofa/defaulttype/VecTypes.h>
-
-namespace meshskeletonization
+namespace meshskeletonizationplugin
 {
 
-using namespace sofa::defaulttype;
+//Here are just several convenient functions to help users know what the plugin contains 
 
-const int MeshSkeletonizationClass = sofa::core::RegisterObject("Ouput the skeleton of a triangulated mesh, from .off file or .obj (MeshLoader) using CGAL")
-        .add< MeshSkeletonization<Vec3Types> >()
-        ;
+extern "C" {
+    SOFA_MESHSKELETONIZATIONPLUGIN_API void initExternalModule();
+    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleName();
+    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleVersion();
+    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleLicense();
+    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleDescription();
+}
 
-template class SOFA_MESHSKELETONIZATIONPLUGIN_API MeshSkeletonization<Vec3Types>;
+void initExternalModule()
+{
+    static bool first = true;
+    if (first)
+    {
+        first = false;
+    }
+}
 
-} // namespace meshskeletonization
+const char* getModuleName()
+{
+    return sofa_tostring(SOFA_TARGET);
+}
+
+const char* getModuleVersion()
+{
+    return sofa_tostring(MESHSKELETONIZATIONPLUGIN_VERSION);
+}
+
+const char* getModuleLicense()
+{
+    return "GPL";
+}
+
+
+const char* getModuleDescription()
+{
+    return "Use CGAL to generate mesh skeleton";
+}
+
+}
