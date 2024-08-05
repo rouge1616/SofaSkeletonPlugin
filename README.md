@@ -1,9 +1,44 @@
-# SofaSkeletonPlugin
-This is just a 3D mesh skeletonization plugin for Sofa Framework using CGAL library
+# MeshSkeletonization plugin
 
-This plugin can be used to generate centerlines from 3D mesh to be used with the [Sofa Framework](https://sofa-framework.org) using CGAL [skeletonization](https://doc.cgal.org/latest/Surface_mesh_skeletonization/index.html)
-The centerlines can be coupled with the [BeamFEMForcefield](https://github.com/sofa-framework/sofa/blob/master/modules/SofaGeneralSimpleFem/BeamFEMForceField.h) component to simulate blood vessels biomechanical behaviour
+This plugin interfaces [CGAL Skeletonization](https://doc.cgal.org/latest/Surface_mesh_skeletonization/index.html) with [SOFA Framework](https://www.sofa-framework.org/). Given a triangulated surface mesh, it outputs in a file a set of points representing the skeleton of the mesh. The skeleton is splited per polyline allowing to identify biforcation in case they exist. 
 
-You can find examples in the *scenes* directory
 
-![Mesh Skeletonization and Beams](https://github.com/rouge1616/SofaSkeletonPlugin/blob/master/MeshSkeletonization.jpg)
+## Build
+
+The build can be done In-tree or Out of tree, see SOFA  [documentation](https://www.sofa-framework.org/community/doc/plugins/build-a-plugin-from-sources/).
+
+
+
+## Usage
+
+The example bellow store in the output file the skeleton of a the input vessel mesh. 
+```xml
+<Node name="root" dt="0.01" gravity="0 -1 0">
+	<VisualStyle displayFlags="showVisual showCollisionModels showWireframe"/>
+    <RequiredPlugin pluginName="MeshSkeletonizationPlugin"/>
+    <RequiredPlugin pluginName='SofaOpenglVisual'/>
+    
+    <MeshObjLoader name="meshLoader" filename="../data/mesh/vessels.obj" />
+
+    <MeshSkeletonization template="Vec3d" name="skeleton"
+                    inputVertices="@meshLoader.position" inputTriangles="@meshLoader.triangles"
+                    inputFile="../data/skeletons/output_vessels_skeleton.txt"
+                    />
+    
+    <Node name="visual">
+        <OglModel src="@../meshLoader"/>
+    </Node>
+	
+</Node>
+```
+Please note that it is also compatible with [SOFAPython3](https://sofapython3.readthedocs.io/en/latest/)
+
+The scene above visualusation: 
+![Mesh Skeletonization ](./data/img/visu_skel.png)
+
+Other examples can be found in the *scenes* directory
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.

@@ -1,6 +1,6 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2019 INRIA, USTL, UJF, CNRS, MGH                    *
+*                 SOFA, Simulation Open-Framework Architecture                *
+*                    (c) 2006 INRIA, USTL, UJF, CNRS, MGH                     *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -19,66 +19,19 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#include <SkeletonPlugin/config.h>
+#ifndef MeshSkeletonizationPlugin_CONFIG_H
+#define MeshSkeletonizationPlugin_CONFIG_H
 
-//#include <MeshGenerationFromPolyhedron.h>
+#include <sofa/config.h>
 
-namespace sofa
-{
+#define MeshSkeletonizationPlugin_MAJOR_VERSION ${MeshSkeletonizationPlugin_MAJOR_VERSION}
+#define MeshSkeletonizationPlugin_MINOR_VERSION ${MeshSkeletonizationPlugin_MINOR_VERSION}
 
-namespace component
-{
+#ifdef SOFA_BUILD_MeshSkeletonizationPlugin
+#  define SOFA_TARGET MeshSkeletonizationPlugin
+#  define SOFA_MeshSkeletonizationPlugin_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#else
+#  define SOFA_MeshSkeletonizationPlugin_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#endif
 
-//Here are just several convenient functions to help users know what the plugin contains 
-
-extern "C" {
-    SOFA_SkeletonPlugin_API void initExternalModule();
-    SOFA_SkeletonPlugin_API const char* getModuleName();
-    SOFA_SkeletonPlugin_API const char* getModuleVersion();
-    SOFA_SkeletonPlugin_API const char* getModuleLicense();
-    SOFA_SkeletonPlugin_API const char* getModuleDescription();
-    SOFA_SkeletonPlugin_API const char* getModuleComponentList();
-}
-
-void initExternalModule()
-{
-    static bool first = true;
-    if (first)
-    {
-        first = false;
-    }
-}
-
-const char* getModuleName()
-{
-    return "CGAL Plugin";
-}
-
-const char* getModuleVersion()
-{
-    return "0.2";
-}
-
-const char* getModuleLicense()
-{
-    return "LGPL";
-}
-
-
-const char* getModuleDescription()
-{
-    return "Use CGAL functionnalities into SOFA";
-}
-
-const char* getModuleComponentList()
-{
-    return "MeshGenerationFromPolyhedron, TriangularConvexHull3D";
-}
-
-
-
-}
-
-}
-
-
+#endif

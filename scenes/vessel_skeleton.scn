@@ -1,0 +1,17 @@
+<Node name="root" dt="0.01" gravity="0 -1 0">
+	<VisualStyle displayFlags="showVisual showCollisionModels showWireframe"/>
+    <RequiredPlugin pluginName="MeshSkeletonizationPlugin"/>
+    <RequiredPlugin pluginName='SofaOpenglVisual'/>
+    
+    <MeshObjLoader name="meshLoader" filename="../data/mesh/vessels.obj" />
+
+    <MeshSkeletonization template="Vec3d" name="skeleton"
+                    inputVertices="@meshLoader.position" inputTriangles="@meshLoader.triangles"
+                    inputFile="../data/skeletons/output_vessels_skeleton.txt"
+                    />
+    
+    <Node name="visual">
+        <OglModel src="@../meshLoader"/>
+    </Node>
+	
+</Node>

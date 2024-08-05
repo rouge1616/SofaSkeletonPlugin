@@ -19,19 +19,25 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#ifndef SkeletonPlugin_CONFIG_H
-#define SkeletonPlugin_CONFIG_H
+/*
+ * CGALSkeltonization.cpp
+ *
+ * Last update: 15 of June 2021
+ * Author: Nazim Haouchine & Sidaty El Hadramy
+ */
+#define SkeletonPlugin_DECIMETEMESH_CPP
 
-#include <sofa/config.h>
+#include <config.h.in>
+#include <MeshSkeletonization.inl>
+#include <sofa/core/ObjectFactory.h>
+#include <sofa/defaulttype/VecTypes.h>
+#include <sofa/defaulttype/RigidTypes.h>
 
-#define SkeletonPlugin_MAJOR_VERSION ${SkeletonPlugin_MAJOR_VERSION}
-#define SkeletonPlugin_MINOR_VERSION ${SkeletonPlugin_MINOR_VERSION}
+using namespace sofa::defaulttype;
+using namespace cgal;
 
-#ifdef SOFA_BUILD_SkeletonPlugin
-#  define SOFA_TARGET SkeletonPlugin
-#  define SOFA_SkeletonPlugin_API SOFA_EXPORT_DYNAMIC_LIBRARY
-#else
-#  define SOFA_SkeletonPlugin_API SOFA_IMPORT_DYNAMIC_LIBRARY
-#endif
+int MeshSkeletonizationClass = sofa::core::RegisterObject("Ouput the skeleton of a triangulated mesh, from .off file or .obj (MeshLoader) using CGAL")
+        .add< MeshSkeletonization<Vec3Types> >()
+        ;
 
-#endif
+template class SOFA_MeshSkeletonizationPlugin_API cgal::MeshSkeletonization<Vec3Types>;
