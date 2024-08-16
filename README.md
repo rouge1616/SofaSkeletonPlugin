@@ -7,6 +7,8 @@ This plugin interfaces [CGAL Skeletonization](https://doc.cgal.org/latest/Surfac
 
 The build can be done In-tree or Out of tree, see SOFA  [documentation](https://www.sofa-framework.org/community/doc/plugins/build-a-plugin-from-sources/).
 
+- CGAL version needed should be greater than 4.9
+- SOFA version compatible since v22.06 
 
 
 ## Usage
@@ -14,29 +16,42 @@ The build can be done In-tree or Out of tree, see SOFA  [documentation](https://
 The example bellow store in the output file the skeleton of a the input vessel mesh. 
 ```xml
 <Node name="root" dt="0.01" gravity="0 -1 0">
-	<VisualStyle displayFlags="showVisual showCollisionModels showWireframe"/>
-    <RequiredPlugin pluginName="MeshSkeletonizationPlugin"/>
-    <RequiredPlugin pluginName='SofaOpenglVisual'/>
+    <VisualStyle displayFlags="showVisual showCollisionModels showWireframe"/>
+    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+    <RequiredPlugin name="Sofa.Component.SceneUtility"/> <!-- Needed to use components [InfoComponent] -->
+    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+    <RequiredPlugin name="MeshSkeletonizationPlugin"/>
     
-    <MeshObjLoader name="meshLoader" filename="../data/mesh/vessels.obj" />
+    <DefaultAnimationLoop />
+    <MeshOBJLoader name="meshLoader" filename="../data/mesh/vessels.obj" />
 
     <MeshSkeletonization template="Vec3d" name="skeleton"
                     inputVertices="@meshLoader.position" inputTriangles="@meshLoader.triangles"
-                    inputFile="../data/skeletons/output_vessels_skeleton.txt"
+                    outputSkeleton="../data/skeletons/output_vessels_skeleton.txt"
                     />
     
     <Node name="visual">
         <OglModel src="@../meshLoader"/>
     </Node>
-	
+    
 </Node>
 ```
-Please note that it is also compatible with [SOFAPython3](https://sofapython3.readthedocs.io/en/latest/)
+
+It is important to specify the Data ```outputSkeleton``` in which the plugin will write the centerlines. 
+
+This file will contain a set of points per polyline, polylines are separated by an empty line. Biforcation points can be found on their corresponant polylines.
+
+Please note that the plugin is compatible with [SOFAPython3](https://sofapython3.readthedocs.io/en/latest/)
 
 The scene above visualusation: 
 ![Mesh Skeletonization ](./data/img/visu_skel.png)
 
 Other examples can be found in the *scenes* directory
+
+## AUTHOR :
+ - Nazim Haouchine
+ - Sidaty El Hadramy
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
