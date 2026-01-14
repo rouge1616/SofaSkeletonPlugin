@@ -19,38 +19,39 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#include <MeshSkeletonizationPlugin/config.h>
+#include <MeshSkeletonizationPlugin/init.h>
+
+#include <sofa/core/ObjectFactory.h>
+#include <sofa/helper/system/PluginManager.h>
 
 namespace meshskeletonizationplugin
 {
 
-//Here are just several convenient functions to help users know what the plugin contains 
+extern void registerMeshSkeletonization(sofa::core::ObjectFactory* factory);
 
+//Here are just several convenient functions to help users know what the plugin contains
 extern "C" {
-    SOFA_MESHSKELETONIZATIONPLUGIN_API void initExternalModule();
-    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleName();
-    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleVersion();
-    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleLicense();
-    SOFA_MESHSKELETONIZATIONPLUGIN_API const char* getModuleDescription();
+    SOFA_EXPORT_DYNAMIC_LIBRARY void initExternalModule();
+    SOFA_EXPORT_DYNAMIC_LIBRARY const char* getModuleName();
+    SOFA_EXPORT_DYNAMIC_LIBRARY const char* getModuleVersion();
+    SOFA_EXPORT_DYNAMIC_LIBRARY const char* getModuleLicense();
+    SOFA_EXPORT_DYNAMIC_LIBRARY const char* getModuleDescription();
+    SOFA_EXPORT_DYNAMIC_LIBRARY void registerObjects(sofa::core::ObjectFactory* factory);
 }
 
 void initExternalModule()
 {
-    static bool first = true;
-    if (first)
-    {
-        first = false;
-    }
+    init();
 }
 
 const char* getModuleName()
 {
-    return sofa_tostring(SOFA_TARGET);
+    return MODULE_NAME;
 }
 
 const char* getModuleVersion()
 {
-    return sofa_tostring(MESHSKELETONIZATIONPLUGIN_VERSION);
+    return MODULE_VERSION;
 }
 
 const char* getModuleLicense()
@@ -58,10 +59,26 @@ const char* getModuleLicense()
     return "GPL";
 }
 
-
 const char* getModuleDescription()
 {
     return "Use CGAL to generate mesh skeleton";
+}
+
+void init()
+{
+    static bool first = true;
+    if (first)
+    {
+        // make sure that this plugin is registered into the PluginManager
+        sofa::helper::system::PluginManager::getInstance().registerPlugin(MODULE_NAME);
+        
+        first = false;
+    }
+}
+
+void registerObjects(sofa::core::ObjectFactory* factory)
+{
+    registerMeshSkeletonization(factory);
 }
 
 }
