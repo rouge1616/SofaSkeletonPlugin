@@ -22,8 +22,7 @@
 #pragma once
 
 #include <sofa/config.h>
-
-#define MESHSKELETONIZATIONPLUGIN_VERSION @PROJECT_VERSION@
+#include <sofa/config/sharedlibrary_defines.h>
 
 #ifdef SOFA_BUILD_MESHSKELETONIZATIONPLUGIN
 #  define SOFA_TARGET @PROJECT_NAME@
@@ -31,3 +30,9 @@
 #else
 #  define SOFA_MESHSKELETONIZATIONPLUGIN_API SOFA_IMPORT_DYNAMIC_LIBRARY
 #endif
+
+namespace meshskeletonizationplugin
+{
+    constexpr const char* MODULE_NAME = "@PROJECT_NAME@";
+    constexpr const char* MODULE_VERSION = "@PROJECT_VERSION@";
+} // namespace meshskeletonizationplugin

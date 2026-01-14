@@ -1,6 +1,6 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2019 INRIA, USTL, UJF, CNRS, MGH                    *
+*                 SOFA, Simulation Open-Framework Architecture                *
+*                    (c) 2006 INRIA, USTL, UJF, CNRS, MGH                     *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -19,27 +19,11 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-/*
-  * Author: Nazim Haouchine & Sidaty El Hadramy
- */
-#define MESHSKELETONIZATION_CPP
+#pragma once
 
-#include <MeshSkeletonizationPlugin/MeshSkeletonization.inl>
-
-#include <sofa/core/ObjectFactory.h>
-#include <sofa/defaulttype/VecTypes.h>
+#include <MeshSkeletonizationPlugin/config.h>
 
 namespace meshskeletonizationplugin
 {
-
-using namespace sofa::defaulttype;
-
-void registerMeshSkeletonization(sofa::core::ObjectFactory* factory)
-{
-    factory->registerObjects(sofa::core::ObjectRegistrationData("Ouput the skeleton of a triangulated mesh, from .off file or .obj (MeshLoader) using CGAL")
-             .add< MeshSkeletonization<Vec3Types> >());
-}
-
-template class SOFA_MESHSKELETONIZATIONPLUGIN_API MeshSkeletonization<Vec3Types>;
-
+    SOFA_MESHSKELETONIZATIONPLUGIN_API void init();
 } // namespace meshskeletonizationplugin

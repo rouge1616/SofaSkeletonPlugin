@@ -13,12 +13,13 @@ set(PLUGIN_SKELETONIZATION_SRC_DIR src/MeshSkeletonizationPlugin)
 
 set(HEADER_FILES
     ${PLUGIN_SKELETONIZATION_SRC_DIR}/config.h.in
+    ${PLUGIN_SKELETONIZATION_SRC_DIR}/init.h
     ${PLUGIN_SKELETONIZATION_SRC_DIR}/MeshSkeletonization.h
     ${PLUGIN_SKELETONIZATION_SRC_DIR}/MeshSkeletonization.inl
 )
 
 set(SOURCE_FILES
-    ${PLUGIN_SKELETONIZATION_SRC_DIR}/initMeshSkeletonizationPlugin.cpp
+    ${PLUGIN_SKELETONIZATION_SRC_DIR}/init.cpp
     ${PLUGIN_SKELETONIZATION_SRC_DIR}/MeshSkeletonization.cpp
 )
 
